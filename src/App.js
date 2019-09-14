@@ -6,7 +6,7 @@ export const ThemeContext = React.createContext();
 
 function App() {
   console.log("Render App");
-  const [theme, setTheme] = useState("green");
+  const [theme, setTheme] = useState(getRandomColor());
 
   return (
     <ThemeContext.Provider value={{ backgroundColor: theme }}>
@@ -17,7 +17,7 @@ function App() {
       <button
         onClick={() =>
           setTheme(prevTheme => {
-            return prevTheme === "red" ? "blue" : "red";
+            return prevTheme === "red" ? getRandomColor() : "red";
           })
         }
       >
@@ -25,6 +25,15 @@ function App() {
       </button>
     </ThemeContext.Provider>
   );
+}
+
+function getRandomColor() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
 
 export default App;
